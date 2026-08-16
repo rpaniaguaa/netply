@@ -9,9 +9,9 @@ def validate_cidr(cidr):
 
     try:
         ip,_ = cidr.split("/")
-        #la variable network se usará más adelante para validar si la ip es de red o broadcast
+        #network variable is used to validate if the ip is a network or a broadcast address
         network = ipaddress.IPv4Network(cidr, strict=False)
-        #Separamos la ip del prefijo para realizar dicha validación
+        #we separate the IP from the mask to get the host 
         ip_obj = ipaddress.IPv4Address(ip)
         
     except ValueError:
