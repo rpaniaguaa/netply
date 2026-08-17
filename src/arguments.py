@@ -6,10 +6,19 @@ def create_parse():
 Examples:
 
     #Enable dhcp config
-    python3 netply enp0s8 dhcp
+    python netply enp0s8 dhcp
 
     #Enable dhcp config (defaults to dhcp if no configuration type is specified)
-    python3 netply enp0s8 
+    python netply enp0s8
+
+    #Enable static configuration
+    python netply enp0s8 static -a 192.168.1.1/24
+
+    #Configure gateway (defaults to "default" if no destination specified)
+    python netply enp0s8 static -a 192.168.1.10/24 -t -v 192.168.1.1
+
+    #Configure DNS
+    python netply enp0s8 static -d 8.8.8.8 [1.1.1.1 [...]]
 
     """
     parse = argparse.ArgumentParser(
@@ -29,7 +38,7 @@ Examples:
     parse.add_argument("-f","--force",action="store_true",help="Apply Netplan configuration without asking for confirmation")
 
     #DNS configuration
-    parse.add_argument("-d","--dns-addresses",metavar="Ipv4",type=validate_ip,nargs="+",help="IPv4 DNS addresses")
+    parse.add_argument("-d","--dns-addresses",metavar="Ipv4",type=validate_dns,nargs="+",help="IPv4 DNS addresses")
     parse.add_argument("-s","--search",metavar="domain",type=str,help="specify DNS search domains")
 
     #Routing config
@@ -37,5 +46,10 @@ Examples:
     parse.add_argument("-t","--to",metavar="IPv4/CIDR",type=validate_route_target,default="default",nargs='?',help="Specify the destination network. If the mask prefix is not specified, the program assumes that the IP is a individual host")
     parse.add_argument("-v","--via",metavar="IPv4 gateway",type=validate_ip,help="Specify the IPv4 gateway")
 
+#    args = parse.parse_args()
+
     return parse
+
+#parse = create_parse()
+#arg = parse.parse_args()
 

@@ -45,7 +45,32 @@ def validate_ip(ip):
 
 
     try:
-        return ipaddress.IPv4Address(ip)
+        ip_str = ipaddress.ip_address(ip)
+
+        if  ip_str.is_loopback or ip_str.is_link_local or ip_str.is_multicast or ip_str.is_reserved or str(ip_str) == '0.0.0.0':
+            raise argparse.ArgumentTypeError(f"'{ip}' is not a valid host")
+        else:
+            return ip_str
+        
+    except ValueError:
+        raise argparse.ArgumentTypeError(f"'{ip}' is not a valid IPv4 address.")
+
+
+def validate_dns(ip):
+    """Validates if the string is a valid IP without the subnet mask prefix for DNS"""
+
+    if '/' in ip:
+        raise argparse.ArgumentTypeError(f"'{ip}' subnet mask prefix is not required")
+
+
+    try:
+        ip_str = ipaddress.ip_address(ip)
+        #loopback addresses in DNS are allowed
+        if  ip_str.is_link_local or ip_str.is_multicast or ip_str.is_reserved or str(ip_str) == '0.0.0.0':
+            raise argparse.ArgumentTypeError(f"'{ip}' is not a valid host")
+        else:
+            return ip_str
+        
     except ValueError:
         raise argparse.ArgumentTypeError(f"'{ip}' is not a valid IPv4 address.")
 
