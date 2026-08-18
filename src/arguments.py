@@ -1,5 +1,6 @@
 import argparse
 from ip_validations import *
+from commands import exists_interface
 
 def create_parse():
     epilog_text = """
@@ -30,7 +31,7 @@ Examples:
     )
 
     #Positional arguments
-    parse.add_argument("interface",type=str,help="network interface to configure")
+    parse.add_argument("interface",type=exists_interface,help="network interface to configure")
     parse.add_argument("type",metavar="type",choices=["dhcp","static"],type=str,default="dhcp",nargs="?",help="The netplan configuration type (choices: dhcp, static)")
 
     #Core configurations
@@ -46,10 +47,10 @@ Examples:
     parse.add_argument("-t","--to",metavar="IPv4/CIDR",type=validate_route_target,default="default",nargs='?',help="Specify the destination network. If the mask prefix is not specified, the program assumes that the IP is a individual host")
     parse.add_argument("-v","--via",metavar="IPv4 gateway",type=validate_ip,help="Specify the IPv4 gateway")
 
-#    args = parse.parse_args()
+    args = parse.parse_args()
 
     return parse
 
-#parse = create_parse()
-#arg = parse.parse_args()
+parse = create_parse()
+arg = parse.parse_args()
 
