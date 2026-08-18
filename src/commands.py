@@ -1,9 +1,13 @@
-import os
 import argparse
+import os
+import subprocess
+
+### Validate interfaces ###
 
 def get_interfaces():
     path = "/sys/class/net/"
     return [iface for iface in os.listdir(path) if iface != 'lo']
+
 
 def exists_interface(iface):
 
@@ -15,4 +19,15 @@ def exists_interface(iface):
     
     else:
         return iface
- 
+
+
+### Validate admin user ###
+
+def is_root():
+    return os.geteuid() == 0
+
+
+### Validate if netplan config file exists ###
+
+def exists_netplan_config(NETPLAN_FILE):
+    return os.path.isfile(NETPLAN_FILE)

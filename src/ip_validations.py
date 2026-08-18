@@ -13,16 +13,20 @@ def validate_cidr(cidr):
         network = ipaddress.IPv4Network(cidr, strict=False)
         #we separate the IP from the mask to get the host 
         ip_obj = ipaddress.IPv4Address(ip)
+
+        if ip_obj == network.network_address:
+                raise argparse.ArgumentTypeError(f"'{ip_obj}' is a network address. Please enter a valid host IP")
+                
+        elif ip_obj == network.broadcast_address:
+                raise argparse.ArgumentTypeError(f"'{ip_obj}' is a broadcast address. Please enter a valid host IP")
+
+        else:
+            return cidr  
         
     except ValueError:
         raise argparse.ArgumentTypeError(f"'{cidr}' is not valid Ipv4/CIDR anotation")
 
-    if ip_obj == network.network_address:
-        raise argparse.ArgumentTypeError(f"'{ip_obj}' is a network address. Please enter a valid host IP")
-        
-    if ip_obj == network.broadcast_address:
-        raise argparse.ArgumentTypeError(f"'{ip_obj}' is a broadcast address. Please enter a valid host IP")
-
+    
 def validate_route_target(cidr):
     """Validates if the string has the correct CIDR format for network addresses"""
 
