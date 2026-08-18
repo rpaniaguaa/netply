@@ -1,7 +1,7 @@
 import src.arguments
 import argparse
 import src.commands
-
+from src.netpan_config import NetplanConf
 def main():
     NETPLAN_FILE = '/etc/netplan/test.yaml'
     '''
@@ -15,6 +15,7 @@ def main():
         
     parse = src.arguments.create_parse()
     args = parse.parse_args()
+    netplan = NetplanConf(args,NETPLAN_FILE)
     static_args = any([
         args.address is not None,
         args.dns_addresses is not None,
@@ -32,6 +33,8 @@ def main():
         print("error: 'static' requires at least --address parameter")
         exit(3)
 
+    if args.type == 'dhcp':
+        netplan.dhcp_conf()
 
 if __name__ == '__main__':
     main()
