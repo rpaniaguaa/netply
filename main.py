@@ -4,11 +4,11 @@ import src.commands
 from src.netpan_config import NetplanConf
 def main():
     NETPLAN_FILE = '/etc/netplan/test.yaml'
-    '''
+    
     if not src.commands.is_root():
         print("error: cannot access file: permission denied")
         exit(1)
-    '''
+    
     if not src.commands.exists_netplan_config(NETPLAN_FILE):
         print(f"error: '{NETPLAN_FILE}' does not exists")
         exit(2)
@@ -30,11 +30,14 @@ def main():
         exit(3)
 
     if args.type == 'static' and not static_args:
-        print("error: 'static' requires at least --address parameter")
+        print("error: 'static' requires at least another static parameter")
         exit(3)
 
     if args.type == 'dhcp':
         netplan.dhcp_conf()
+
+    elif args.type == 'static' and static_args:
+        netplan.static_conf()
 
 if __name__ == '__main__':
     main()

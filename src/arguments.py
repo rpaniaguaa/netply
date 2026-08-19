@@ -40,7 +40,7 @@ Examples:
 
     #DNS configuration
     parse.add_argument("-d","--dns-addresses",metavar="Ipv4",type=validate_dns,nargs="+",help="IPv4 DNS addresses")
-    parse.add_argument("-s","--search",metavar="domain",type=str,help="specify DNS search domains")
+    parse.add_argument("-s","--search",metavar="domain",type=str,nargs="+",help="specify DNS search domains")
 
     #Routing config
     parse.add_argument("-g","--gateway",metavar="IPv4",type=validate_ip,help="[DEPRECATED] specify the IPv4  gateway for Netplan configuration")
