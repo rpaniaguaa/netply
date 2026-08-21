@@ -16,7 +16,7 @@ Examples:
     python netply enp0s8 static -a 192.168.1.1/24
 
     #Configure gateway (defaults to "default" if no destination specified)
-    python netply enp0s8 static -a 192.168.1.10/24 -t -v 192.168.1.1
+    python netply enp0s8 static -a 192.168.1.10/24 -v 192.168.1.1
 
     #Configure DNS
     python netply enp0s8 static -d 8.8.8.8 [1.1.1.1 [...]]
@@ -47,10 +47,6 @@ Examples:
     parse.add_argument("-t","--to",metavar="IPv4/CIDR",type=validate_route_target,default="default",nargs='?',help="Specify the destination network. If the mask prefix is not specified, the program assumes that the IP is a individual host")
     parse.add_argument("-v","--via",metavar="IPv4 gateway",type=validate_ip,help="Specify the IPv4 gateway")
 
-#   args = parse.parse_args()
-
     return parse
 
-#parse = create_parse()
-#arg = parse.parse_args()
 

@@ -2,8 +2,9 @@ import src.arguments
 import argparse
 import src.commands
 from src.netpan_config import NetplanConf
+
 def main():
-    NETPLAN_FILE = '/etc/netplan/test.yaml'
+    NETPLAN_FILE = '/etc/netplan/00-installer-config.yaml'
     
     if not src.commands.is_root():
         print("error: cannot access file: permission denied")

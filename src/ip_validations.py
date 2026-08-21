@@ -45,8 +45,9 @@ def validate_route_target(cidr):
         ip_str = ipaddress.IPv4Address(ip)
         if  ip_str.is_loopback or ip_str.is_link_local or ip_str.is_multicast or ip_str.is_reserved:
             raise argparse.ArgumentTypeError(f"'{cidr}' is not a valid destination network or IPv4 address.")
-        
-        return ipaddress.IPv4Network(cidr, strict=True)
+
+        net_ip = ipaddress.IPv4Network(cidr,strict=True)
+        return str(net_ip)
     except ValueError:
         raise argparse.ArgumentTypeError(f"'{cidr}' is not a valid IPv4 address.")
 
