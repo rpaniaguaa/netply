@@ -3,9 +3,12 @@ import argparse
 import src.commands
 from src.netpan_config import NetplanConf
 
+def apply_changes():
+    return input("Are you sure you want to apply changes [S/N]?: ").upper() == 'S'
+
 def main():
-    NETPLAN_FILE = '/etc/netplan/00-installer-config.yaml'
-    
+    #NETPLAN_FILE = '/etc/netplan/00-installer-config.yaml'
+    NETPLAN_FILE = './test.yaml'
     if not src.commands.is_root():
         print("error: cannot access file: permission denied")
         exit(1)
@@ -34,11 +37,23 @@ def main():
         print("error: 'static' requires at least another static parameter")
         exit(3)
 
-    if args.type == 'dhcp':
+    
+    if args.type == 'dhcp' and  args.force:
         netplan.dhcp_conf()
+        netplan.netplan_apply()
 
-    elif args.type == 'static' and static_args:
+    elif args.type == 'dhcp' and apply_changes():
+        netplan.dhcp_conf()
+        netplan.netplan_apply()
+
+    if args.type == 'static' and args.force:
         netplan.static_conf()
+        netplan.netplan_apply()
+
+    elif args.type == 'static' and static_args and apply_changes():
+        netplan.static_conf()
+        netplan.netplan_apply()
+
 
 if __name__ == '__main__':
     main()

@@ -1,4 +1,5 @@
 import yaml
+import subprocess
 class NetplanConf:
     def __init__(self,args,NETPLAN_FILE):
         self.args = args
@@ -119,5 +120,9 @@ class NetplanConf:
 
             
         self.__edit_yaml_file()
+
+    def netplan_apply(self):
+        args=['sudo','netplan','apply']
+        subprocess.run(args,text=True)
         
 
