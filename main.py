@@ -7,8 +7,8 @@ def apply_changes():
     return input("Are you sure you want to apply changes [S/N]?: ").upper() == 'S'
 
 def main():
-    #NETPLAN_FILE = '/etc/netplan/00-installer-config.yaml'
-    NETPLAN_FILE = './test.yaml'
+    NETPLAN_FILE = '/etc/netplan/00-installer-config.yaml'
+    
     if not src.commands.is_root():
         print("error: cannot access file: permission denied")
         exit(1)
