@@ -2,6 +2,17 @@
 
 This script was made to automate network configuration via Netplan on Ubuntu and derivative distributions.
 
+## Table of Contents
+- [INSTALLATION](#installation)
+- [USAGE](#usage)
+  - [DHCP config](#dhcp-config)
+  - [Static configuration](#static-configuration)
+    - [Configure gateway](#configure-gateway)
+    - [Configure DNS](#configure-dns)
+- [Modifying the script](#modifying-the-script)
+
+---
+
 ## INSTALLATION
 
 Clone the repository:
