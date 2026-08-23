@@ -3,6 +3,7 @@
 This script was made to automate network configuration via Netplan on Ubuntu and derivative distributions.
 
 ## Table of Contents
+- [PREREQUISITES](#prerequisites)
 - [INSTALLATION](#installation)
 - [USAGE](#usage)
   - [DHCP config](#dhcp-config)
@@ -12,6 +13,16 @@ This script was made to automate network configuration via Netplan on Ubuntu and
 - [Modifying the script](#modifying-the-script)
 
 ---
+
+## PREREQUISITES
+
+Before installing, ensure that your Netplan configuration file is located at `/etc/netplan/00-installer-config.yaml`. 
+
+If your file has a different name, you can rename it by running:
+```bash
+sudo mv /etc/netplan/YOUR_CURRENT_FILE.yaml /etc/netplan/00-installer-config.yaml
+```
+
 
 ## INSTALLATION
 

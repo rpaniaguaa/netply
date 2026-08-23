@@ -111,7 +111,7 @@ class NetplanConf:
                 print("error: missing required argument pairing")
                 print("  Both '--to' (destination) and '--via' (gateway) must be specified together.")    
                 print("  Alternatively, you can specify only a default gateway using '--via' alone.")    
-                exit(3)
+                sys.exit(3)
             
             if 'routes' not in self.data['network']['ethernets'][self.args.interface]:
                 self.data['network']['ethernets'][self.args.interface]['routes'] = dest
