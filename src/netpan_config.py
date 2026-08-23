@@ -1,5 +1,6 @@
 import yaml
 import subprocess
+import sys
 class NetplanConf:
     def __init__(self,args,NETPLAN_FILE):
         self.args = args
@@ -65,7 +66,7 @@ class NetplanConf:
 
         if self.args.gateway and (self.args.to != 'default' or self.args.via):
             print("error: argument --gateway cannot be used with --to or --via")
-            exit(3)
+            sys.exit(3)
 
         if self.__is_empty_file():
             self.data = self.__create_structure()

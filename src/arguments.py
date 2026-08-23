@@ -7,19 +7,19 @@ def create_parse():
 Examples:
 
     #Enable dhcp config
-    python netply enp0s8 dhcp
+    netply enp0s8 dhcp
 
     #Enable dhcp config (defaults to dhcp if no configuration type is specified)
-    python netply enp0s8
+    netply enp0s8
 
     #Enable static configuration
-    python netply enp0s8 static -a 192.168.1.1/24
+    netply enp0s8 static -a 192.168.1.1/24
 
     #Configure gateway (defaults to "default" if no destination specified)
-    python netply enp0s8 static -a 192.168.1.10/24 -v 192.168.1.1
+    netply enp0s8 static -a 192.168.1.10/24 -v 192.168.1.1
 
     #Configure DNS
-    python netply enp0s8 static -d 8.8.8.8 [1.1.1.1 [...]]
+    netply enp0s8 static -d 8.8.8.8 [1.1.1.1 [...]]
 
     """
     parse = argparse.ArgumentParser(

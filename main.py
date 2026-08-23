@@ -1,6 +1,6 @@
 import src.arguments
-import argparse
 import src.commands
+import sys
 from src.netpan_config import NetplanConf
 
 def apply_changes():
@@ -11,11 +11,11 @@ def main():
     
     if not src.commands.is_root():
         print("error: cannot access file: permission denied")
-        exit(1)
+        sys.exit(1)
     
     if not src.commands.exists_netplan_config(NETPLAN_FILE):
         print(f"error: '{NETPLAN_FILE}' does not exists")
-        exit(2)
+        sys.exit(2)
         
     parse = src.arguments.create_parse()
     args = parse.parse_args()
@@ -31,11 +31,11 @@ def main():
     
     if args.type == 'dhcp' and static_args:
         print("error: 'dhcp' cannot be used with any static parameter")
-        exit(3)
+        sys.exit(3)
 
     if args.type == 'static' and not static_args:
         print("error: 'static' requires at least another static parameter")
-        exit(3)
+        sys.exit(3)
 
     
     if args.type == 'dhcp' and  args.force:
